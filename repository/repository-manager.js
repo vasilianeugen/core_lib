@@ -1,5 +1,7 @@
 import { DataSource } from 'typeorm';
-import Path from 'path';
+import Path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 export class RepositoryManager {
     constructor(dataSourceOptions) {
         this.dataSourceOptions = dataSourceOptions;
