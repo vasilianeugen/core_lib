@@ -1,0 +1,9 @@
+export { DeviceAssignmentRepositoryExtension } from './device-assignment.repository';
+export { DeviceComponentRepositoryExtension } from './device-component.repository';
+export { DeviceCustomerRepositoryExtension } from './device-customer.repository';
+export { DeviceEventRepositoryExtension } from './device-event.repository';
+export { DeviceComponentMaintenanceRepositoryExtension } from './device-component-maintenance.repository';
+export { DeviceNoteAttachementRepositoryExtension } from './device-note-attachment.repository';
+export { DeviceNoteRepositoryExtension } from './device-note.repository';
+export { DeviceRepositoryExtension } from './device.repository';
+export { RepositoryManager } from './repository-manager';
