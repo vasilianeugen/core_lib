@@ -1,4 +1,4 @@
-import { EntityManager, MixedList, ObjectLiteral, Repository } from 'typeorm';
+import { DataSource, EntityManager, MixedList, ObjectLiteral, Repository } from 'typeorm';
 import { Device } from '../entity/device';
 import { DeviceAssignment } from '../entity/device-assignment';
 import { DeviceComponent } from '../entity/device-component';
@@ -18,7 +18,7 @@ export interface RepositoryDataSourceOptions extends PostgresConnectionOptions {
 export declare class RepositoryManager {
     protected dataSourceOptions: RepositoryDataSourceOptions;
     entityManager: EntityManager;
-    private dataSource;
+    dataSource: DataSource;
     private static baseRepositoryMap;
     private static customRepositoryMap;
     constructor(dataSourceOptions: RepositoryDataSourceOptions);
