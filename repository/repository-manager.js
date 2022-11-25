@@ -1,8 +1,28 @@
+import { DataSource } from 'typeorm';
+import Path from 'path';
 export class RepositoryManager {
-    constructor(dataSource) {
-        this.dataSource = dataSource;
+    constructor(dataSourceOptions) {
+        this.dataSourceOptions = dataSourceOptions;
         this.entityManager = null;
-        this.entityManager = dataSource.manager;
+        this.dataSource = null;
+        let entities;
+        const subscribers = dataSourceOptions.subscribers;
+        const entitiesLocation = `${Path.join(__dirname, 'entity')}`;
+        console.log(`FOLDER ${entitiesLocation}`);
+        if (dataSourceOptions.entities) {
+            entities = [...Array.isArray(dataSourceOptions.entities) ? dataSourceOptions.entities : Object.values(dataSourceOptions.entities), entitiesLocation];
+        }
+        else {
+            entities = [entitiesLocation];
+        }
+        this.dataSource = new DataSource(Object.assign(Object.assign({}, dataSourceOptions), { entities, subscribers }));
+        this.entityManager = this.dataSource.manager;
+    }
+    initialize() {
+        this.dataSource.initialize();
+    }
+    isInitialized() {
+        return this.dataSource.isInitialized;
     }
     static extend(entity, custom) {
         this.customRepositoryMap.set(entity.name, custom);

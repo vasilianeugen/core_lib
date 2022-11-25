@@ -1,4 +1,4 @@
-import { DataSource, EntityManager, ObjectLiteral, Repository } from 'typeorm';
+import { DataSourceOptions, EntityManager, MixedList, ObjectLiteral, Repository } from 'typeorm';
 import { Device } from '../entity/device';
 import { DeviceAssignment } from '../entity/device-assignment';
 import { DeviceComponent } from '../entity/device-component';
@@ -10,12 +10,19 @@ import { DeviceNoteAttachement } from '../entity/device-note-attachement';
 import { DeviceRepositoryExtension, DeviceAssignmentRepositoryExtension, DeviceComponentRepositoryExtension, DeviceCustomerRepositoryExtension, DeviceEventRepositoryExtension, DeviceComponentMaintenanceRepositoryExtension, DeviceNoteRepositoryExtension, DeviceNoteAttachementRepositoryExtension } from '.';
 type EntityType<Entity> = new () => Entity;
 type ObjectType<Entity> = Entity extends DeviceAssignment ? typeof DeviceAssignmentRepositoryExtension : Entity extends DeviceComponent ? typeof DeviceComponentRepositoryExtension : Entity extends DeviceCustomer ? typeof DeviceCustomerRepositoryExtension : Entity extends DeviceEvent ? typeof DeviceEventRepositoryExtension : Entity extends DeviceComponentMaintenance ? typeof DeviceComponentMaintenanceRepositoryExtension : Entity extends DeviceNoteAttachement ? typeof DeviceNoteAttachementRepositoryExtension : Entity extends DeviceNote ? typeof DeviceNoteRepositoryExtension : Entity extends Device ? typeof DeviceRepositoryExtension : never;
+export declare type RepositoryDataSourceOptions = Omit<DataSourceOptions, 'entities' | 'subscribers'> & {
+    readonly entities?: MixedList<string>;
+    readonly subscribers?: MixedList<string>;
+};
 export declare class RepositoryManager {
-    protected dataSource: DataSource;
+    protected dataSourceOptions: RepositoryDataSourceOptions;
     entityManager: EntityManager;
+    private dataSource;
     private static baseRepositoryMap;
     private static customRepositoryMap;
-    constructor(dataSource: DataSource);
+    constructor(dataSourceOptions: RepositoryDataSourceOptions);
+    initialize(): void;
+    isInitialized(): boolean;
     static extend<CustomRepository, Entity>(entity: EntityType<Entity>, custom: CustomRepository & ThisType<Repository<Entity> & CustomRepository>): Repository<Entity> & CustomRepository;
     getRepository<Entity extends ObjectLiteral>(entity: EntityType<Entity>, initRepositoryExtension?: true): ObjectType<Entity>;
     getRepository<Entity extends ObjectLiteral>(entity: EntityType<Entity>, initRepositoryExtension: false): Repository<Entity>;
