@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "types": "index.d.ts",
+  "typings": "index.d.ts",
   "directories": {
     "test": "tests"
   },
