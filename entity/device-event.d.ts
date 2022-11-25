@@ -1,6 +1,6 @@
 import { Relation } from 'typeorm';
 import { Device } from './device';
-export declare enum Type {
+export declare enum DeviceEventType {
     INSTALLATION = "installation",
     COMMISSIONING = "commissioning",
     DECOMMISSIONING = "decommissioning",
@@ -13,10 +13,10 @@ export declare enum Type {
     DEVICE_ADDED = "device_added",
     DEVICE_REMOVED = "device_removed"
 }
-export declare const CUSTOMER_AWARE_TYPES: Type[];
+export declare const CUSTOMER_AWARE_TYPES: DeviceEventType[];
 export declare class DeviceEvent {
     uuid: string;
-    type: Type;
+    type: DeviceEventType;
     createdAt: Date;
     device: Relation<Device>;
     customerId?: string;

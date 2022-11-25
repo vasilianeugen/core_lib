@@ -11,21 +11,21 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, Jo
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { format } from 'date-fns';
 import { Device } from './device';
-export var Type;
-(function (Type) {
-    Type["INSTALLATION"] = "installation";
-    Type["COMMISSIONING"] = "commissioning";
-    Type["DECOMMISSIONING"] = "decommissioning";
-    Type["MAINTENANCE"] = "maintenance";
-    Type["REPAIR"] = "repair";
-    Type["DISMANTLING"] = "dismantling";
-    Type["RECYCLING"] = "recycling";
-    Type["WARRANTY_GRANTED"] = "warranty_granted";
-    Type["WARRANTY_EXPIRED"] = "warranty_expired";
-    Type["DEVICE_ADDED"] = "device_added";
-    Type["DEVICE_REMOVED"] = "device_removed";
-})(Type || (Type = {}));
-export const CUSTOMER_AWARE_TYPES = [Type.DEVICE_ADDED, Type.DEVICE_REMOVED];
+export var DeviceEventType;
+(function (DeviceEventType) {
+    DeviceEventType["INSTALLATION"] = "installation";
+    DeviceEventType["COMMISSIONING"] = "commissioning";
+    DeviceEventType["DECOMMISSIONING"] = "decommissioning";
+    DeviceEventType["MAINTENANCE"] = "maintenance";
+    DeviceEventType["REPAIR"] = "repair";
+    DeviceEventType["DISMANTLING"] = "dismantling";
+    DeviceEventType["RECYCLING"] = "recycling";
+    DeviceEventType["WARRANTY_GRANTED"] = "warranty_granted";
+    DeviceEventType["WARRANTY_EXPIRED"] = "warranty_expired";
+    DeviceEventType["DEVICE_ADDED"] = "device_added";
+    DeviceEventType["DEVICE_REMOVED"] = "device_removed";
+})(DeviceEventType || (DeviceEventType = {}));
+export const CUSTOMER_AWARE_TYPES = [DeviceEventType.DEVICE_ADDED, DeviceEventType.DEVICE_REMOVED];
 let DeviceEvent = class DeviceEvent {
 };
 __decorate([
@@ -33,7 +33,7 @@ __decorate([
     __metadata("design:type", String)
 ], DeviceEvent.prototype, "uuid", void 0);
 __decorate([
-    Column({ name: 'type', type: 'enum', enum: Type, enumName: 'device_event_types', nullable: false }),
+    Column({ name: 'type', type: 'enum', enum: DeviceEventType, enumName: 'device_event_types', nullable: false }),
     __metadata("design:type", String)
 ], DeviceEvent.prototype, "type", void 0);
 __decorate([

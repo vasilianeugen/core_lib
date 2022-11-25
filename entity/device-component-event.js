@@ -11,12 +11,12 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, Jo
 import { Expose, Transform } from 'class-transformer';
 import { format } from 'date-fns';
 import { DeviceComponent } from './device-component';
-export var Type;
-(function (Type) {
-    Type["DEVICE_COMPONENT_ADDED"] = "device_component_added";
-    Type["DEVICE_COMPONENT_REMOVED"] = "device_component_removed";
-    Type["DEVICE_COMPONENT_MAINTENANCE_REGISTRED"] = "device_component_maintenance_registred";
-})(Type || (Type = {}));
+export var DeviceComponentEventType;
+(function (DeviceComponentEventType) {
+    DeviceComponentEventType["DEVICE_COMPONENT_ADDED"] = "device_component_added";
+    DeviceComponentEventType["DEVICE_COMPONENT_REMOVED"] = "device_component_removed";
+    DeviceComponentEventType["DEVICE_COMPONENT_MAINTENANCE_REGISTRED"] = "device_component_maintenance_registred";
+})(DeviceComponentEventType || (DeviceComponentEventType = {}));
 let DeviceComponentEvent = class DeviceComponentEvent {
 };
 __decorate([
@@ -24,7 +24,7 @@ __decorate([
     __metadata("design:type", String)
 ], DeviceComponentEvent.prototype, "uuid", void 0);
 __decorate([
-    Column({ name: 'type', type: 'enum', enum: Type, enumName: 'device_component_event_types', nullable: false }),
+    Column({ name: 'type', type: 'enum', enum: DeviceComponentEventType, enumName: 'device_component_event_types', nullable: false }),
     __metadata("design:type", String)
 ], DeviceComponentEvent.prototype, "type", void 0);
 __decorate([
