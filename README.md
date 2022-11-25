@@ -1,0 +1,3 @@
+Core libraries
+
+- Typeorm entities

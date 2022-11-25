@@ -1,0 +1,42 @@
+{
+  "name": "libs-microservice-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "types": "index.d.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test tap --debug --node-arg=--loader=ts-node/esm --node-arg=--no-warnings --node-arg=--experimental-specifier-resolution=node src/tests/opa/* --timeout=900 --jobs=1",
+    "lint": "eslint \"{src}/**/*.ts\"",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://Wolf-GmbH@dev.azure.com/Wolf-GmbH/DRIVR/_git/libs-microservice-core"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "opa-compile-response-parser": "^1.0.4",
+    "pg": "^8.8.0",
+    "tap": "^16.3.0",
+    "ts-node": "^10.9.1",
+    "typeorm": "0.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "@types/tap": "^15.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "typescript": "^4.9.3"
+  }
+}
