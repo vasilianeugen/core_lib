@@ -13,7 +13,11 @@ type EntityType<Entity> = new () => Entity;
 type ObjectType<Entity> = Entity extends DeviceAssignment ? typeof DeviceAssignmentRepositoryExtension : Entity extends DeviceComponent ? typeof DeviceComponentRepositoryExtension : Entity extends DeviceCustomer ? typeof DeviceCustomerRepositoryExtension : Entity extends DeviceEvent ? typeof DeviceEventRepositoryExtension : Entity extends DeviceComponentMaintenance ? typeof DeviceComponentMaintenanceRepositoryExtension : Entity extends DeviceNoteAttachement ? typeof DeviceNoteAttachementRepositoryExtension : Entity extends DeviceNote ? typeof DeviceNoteRepositoryExtension : Entity extends Device ? typeof DeviceRepositoryExtension : never;
 export interface RepositoryDataSourceOptions extends PostgresConnectionOptions {
     readonly entities?: MixedList<string>;
+    readonly loadDeafultEntities?: boolean;
     readonly subscribers?: MixedList<string>;
+    readonly loadDeafultSubscribers?: boolean;
+    readonly migrations?: MixedList<string>;
+    readonly loadDeafultMigations?: boolean;
 }
 export declare class RepositoryManager {
     protected dataSourceOptions: RepositoryDataSourceOptions;
@@ -22,6 +26,7 @@ export declare class RepositoryManager {
     private static baseRepositoryMap;
     private static customRepositoryMap;
     constructor(dataSourceOptions: RepositoryDataSourceOptions);
+    private loadDefaultValue;
     initialize(): Promise<void>;
     isInitialized(): boolean;
     static extend<CustomRepository, Entity>(entity: EntityType<Entity>, custom: CustomRepository & ThisType<Repository<Entity> & CustomRepository>): Repository<Entity> & CustomRepository;

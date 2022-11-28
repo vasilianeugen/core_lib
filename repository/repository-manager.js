@@ -16,26 +16,28 @@ export class RepositoryManager {
         this.dataSourceOptions = dataSourceOptions;
         this.entityManager = null;
         this.dataSource = null;
-        let entities;
-        let subscribers;
-        const entitiesLocation = `${Path.join(__dirname, '..', 'entity', '**/*.{js,ts}')}`;
-        console.log(`Entities folder ${entitiesLocation}`);
-        if (dataSourceOptions.entities) {
-            entities = [...Array.isArray(dataSourceOptions.entities) ? dataSourceOptions.entities : Object.values(dataSourceOptions.entities), entitiesLocation];
-        }
-        else {
-            entities = [entitiesLocation];
-        }
-        const subscribersLocation = `${Path.join(__dirname, '..', 'subscriber', '**/*.{js,ts}')}`;
-        console.log(`Subscribers folder ${subscribersLocation}`);
-        if (dataSourceOptions.entities) {
-            subscribers = [...Array.isArray(dataSourceOptions.subscribers) ? dataSourceOptions.subscribers : Object.values(dataSourceOptions.subscribers), subscribersLocation];
-        }
-        else {
-            subscribers = [subscribersLocation];
-        }
-        this.dataSource = new DataSource(Object.assign(Object.assign({}, dataSourceOptions), { entities, subscribers }));
+        const entities = this.loadDefaultValue('entity', dataSourceOptions.entities, dataSourceOptions.loadDeafultEntities);
+        const subscribers = this.loadDefaultValue('subscriber', dataSourceOptions.subscribers, dataSourceOptions.loadDeafultSubscribers);
+        const migrations = this.loadDefaultValue('migration', dataSourceOptions.migrations, dataSourceOptions.loadDeafultMigations);
+        this.dataSource = new DataSource(Object.assign(Object.assign({}, dataSourceOptions), { entities, subscribers, migrations }));
         this.entityManager = this.dataSource.manager;
+    }
+    loadDefaultValue(folder, initialValue, loadDeafult) {
+        let loadedValue;
+        if (typeof loadDeafult === 'undefined' ? true : loadDeafult) {
+            const folderLocation = `${Path.join(__dirname, '..', folder, '**/*.{js,ts}')}`;
+            console.log(`${folder} folder ${folderLocation}`);
+            if (initialValue) {
+                loadedValue = [...Array.isArray(initialValue) ? initialValue : Object.values(initialValue), folderLocation];
+            }
+            else {
+                loadedValue = [folderLocation];
+            }
+        }
+        else {
+            loadedValue = initialValue;
+        }
+        return loadedValue;
     }
     initialize() {
         return __awaiter(this, void 0, void 0, function* () {
