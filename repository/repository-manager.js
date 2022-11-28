@@ -9,7 +9,7 @@ export class RepositoryManager {
         this.dataSource = null;
         let entities;
         const subscribers = dataSourceOptions.subscribers;
-        const entitiesLocation = `${Path.join(__dirname, 'entity')}`;
+        const entitiesLocation = `${Path.join(__dirname, '..', 'entity')}`;
         console.log(`FOLDER ${entitiesLocation}`);
         if (dataSourceOptions.entities) {
             entities = [...Array.isArray(dataSourceOptions.entities) ? dataSourceOptions.entities : Object.values(dataSourceOptions.entities), entitiesLocation];
