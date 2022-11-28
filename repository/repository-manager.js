@@ -19,7 +19,7 @@ export class RepositoryManager {
         const entities = this.loadDefaultValue('entity', dataSourceOptions.entities, dataSourceOptions.loadDeafultEntities);
         const subscribers = this.loadDefaultValue('subscriber', dataSourceOptions.subscribers, dataSourceOptions.loadDeafultSubscribers);
         const migrations = this.loadDefaultValue('migration', dataSourceOptions.migrations, dataSourceOptions.loadDeafultMigations);
-        this.dataSource = new DataSource(Object.assign(Object.assign({}, dataSourceOptions), { entities, subscribers, migrations }));
+        this.dataSource = new DataSource(Object.assign(Object.assign({}, dataSourceOptions), { entities, subscribers, migrations, migrationsTableName: 'migrations' }));
         this.entityManager = this.dataSource.manager;
     }
     loadDefaultValue(folder, initialValue, loadDeafult) {
