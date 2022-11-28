@@ -4,6 +4,7 @@ export * from './subscriber';
 export * from './factory';
 export * from './opa';
 export * from './error/base.error';
+import { Logger, LoggerOptions } from 'pino';
 export declare enum LogLevel {
     INFO = "info",
     DEBUG = "debug"
@@ -21,7 +22,4 @@ export declare enum LogEventType {
     DATABASE_FAILURE = "database_failure",
     OPA_MIDDLEWARE = "opa_middleware"
 }
-export declare const logger: import("pino").Logger<{
-    level: string;
-    redact: string[];
-}>;
+export declare const logger: Logger<LoggerOptions>;
