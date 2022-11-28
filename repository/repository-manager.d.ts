@@ -22,7 +22,7 @@ export declare class RepositoryManager {
     private static baseRepositoryMap;
     private static customRepositoryMap;
     constructor(dataSourceOptions: RepositoryDataSourceOptions);
-    initialize(): void;
+    initialize(): Promise<void>;
     isInitialized(): boolean;
     static extend<CustomRepository, Entity>(entity: EntityType<Entity>, custom: CustomRepository & ThisType<Repository<Entity> & CustomRepository>): Repository<Entity> & CustomRepository;
     getRepository<Entity extends ObjectLiteral>(entity: EntityType<Entity>, initRepositoryExtension?: true): ObjectType<Entity>;
