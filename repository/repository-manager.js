@@ -17,14 +17,22 @@ export class RepositoryManager {
         this.entityManager = null;
         this.dataSource = null;
         let entities;
-        const subscribers = dataSourceOptions.subscribers;
+        let subscribers;
         const entitiesLocation = `${Path.join(__dirname, '..', 'entity', '**/*.{js,ts}')}`;
-        console.log(`FOLDER ${entitiesLocation}`);
+        console.log(`Entities folder ${entitiesLocation}`);
         if (dataSourceOptions.entities) {
             entities = [...Array.isArray(dataSourceOptions.entities) ? dataSourceOptions.entities : Object.values(dataSourceOptions.entities), entitiesLocation];
         }
         else {
             entities = [entitiesLocation];
+        }
+        const subscribersLocation = `${Path.join(__dirname, '..', 'subscriber', '**/*.{js,ts}')}`;
+        console.log(`Subscribers folder ${subscribersLocation}`);
+        if (dataSourceOptions.entities) {
+            subscribers = [...Array.isArray(dataSourceOptions.subscribers) ? dataSourceOptions.subscribers : Object.values(dataSourceOptions.subscribers), subscribersLocation];
+        }
+        else {
+            subscribers = [subscribersLocation];
         }
         this.dataSource = new DataSource(Object.assign(Object.assign({}, dataSourceOptions), { entities, subscribers }));
         this.entityManager = this.dataSource.manager;
